@@ -34,3 +34,22 @@
       </form>
     </div>
   </nav>
+
+
+  <div *ngIf="undefined === sprints">Loading...</div>
+<div *ngIf="undefined !== sprints">
+  <ul>
+    <li *ngFor="let post of sprints['posts']" [innerHTML]="">
+    </li>
+  </ul>
+</div>
+
+<mat-list>
+  <mat-list-item *ngFor="let sprint of sprints">
+    <h3 matLine> {{sprint.sprintId}} </h3>
+    <p matLine>
+      <span> {{sprint.sprintName}} </span>
+      <span class="demo-2"> -- {{sprint.sprintPoints}} </span>
+    </p>
+  </mat-list-item>
+</mat-list>
