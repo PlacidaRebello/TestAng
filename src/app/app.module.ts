@@ -17,6 +17,8 @@ import {MatCardModule} from '@angular/material/card';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
 import { DefaultPageComponent } from './default-page/default-page.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import{HttpClientModule} from '@angular/common/http';
@@ -46,6 +48,8 @@ import { SprintServiceService } from './sprint-service.service';
     MatCardModule,
     MatGridListModule,
     MatMenuModule,
+    MatInputModule,
+    MatTableModule,
     DragDropModule,
     HttpClientModule,
     FormsModule,

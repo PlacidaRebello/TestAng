@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute,Router} from '@angular/router';
 import { SprintServiceService } from 'src/app/sprint-service.service';
-import {FormBuilder,FormArray,Validators} from '@angular/forms';
+import {FormBuilder,FormArray,Validators, FormGroup,FormControl} from '@angular/forms';
+import {Sprint} from 'src/app/Models/sprint';
 
 @Component({
   selector: 'app-weather-forecast',
@@ -12,12 +13,20 @@ export class WeatherForecastComponent implements OnInit {
 
   sprints:any=[];
   data:any=[];
-  sprint={
-    sprintName:'',
-    sprintPoints:''
-  }
+  // sprint={
+  //   sprintName:'',
+  //   sprintPoints:''
+  // }
 
-  constructor(private SprintService:SprintServiceService,private route:ActivatedRoute,private router:Router) { }
+  sprintForm=this.fb.group({
+    sprintName:['',[Validators.required,Validators.maxLength(10)]],
+    sprintPoints:['',Validators.required]
+  });
+
+  constructor(private SprintService:SprintServiceService,private route:ActivatedRoute,private router:Router,private fb:FormBuilder) 
+  {
+
+   }
 
   ngOnInit() {
     this.getSprintsList();
@@ -35,12 +44,18 @@ export class WeatherForecastComponent implements OnInit {
     );
   }
 
+  onSubmit(){
+    this.CreateSprint(this.sprintForm.value);
+  }
+
   CreateSprint(formvalues){
       let sprint={
         sprintName:formvalues.sprintName,
         sprintPoints:formvalues.sprintPoints
       }
       console.log(sprint,"sprint");
+      
+      console.log(sprint);
       this.SprintService.createSprint(sprint)
       .subscribe(resp=>{
         console.log(resp,"resp");
