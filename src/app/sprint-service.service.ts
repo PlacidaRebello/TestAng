@@ -26,8 +26,17 @@ export class SprintServiceService {
         }
     };
 
-    return this.http
-    .get<any[]>(url_)
+    return this.http.get<any[]>(url_)
     .pipe(map(data=>data));
-}
+  }
+
+  // getSprintList() {
+  //   return this.http.get(this.baseUrl+'/api/Sprints');
+  // }
+
+  createSprint(data)
+  {
+    return this.http.post(this.baseUrl+'api/Sprints',data);
+  }
+
 }

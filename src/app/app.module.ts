@@ -21,6 +21,7 @@ import { DefaultPageComponent } from './default-page/default-page.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import{HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import { SprintServiceService } from './sprint-service.service';
 
 @NgModule({
@@ -47,7 +48,8 @@ import { SprintServiceService } from './sprint-service.service';
     MatMenuModule,
     DragDropModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [SprintServiceService],
   bootstrap: [AppComponent]
