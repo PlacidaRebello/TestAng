@@ -22,6 +22,7 @@ export class SprintsClient {
         let url_ = this.baseUrl + "/api/Sprints";
         url_ = url_.replace(/[?&]$/, "");
        //let url_="https://localhost:44322/api/Sprints";
+       
         let options_ = <RequestInit>{
             method: "GET",
             headers: {
