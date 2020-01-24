@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Sprint } from './Models/sprint';
+// import 'rxjs/add/operator/map';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +11,17 @@ import { map } from 'rxjs/operators';
 export class SprintServiceService {
   private baseUrl: string= "https://localhost:44322/";
 
-  constructor(private http:HttpClient) { 
-    
+  constructor(private http:HttpClient) {     
   }
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
 
   getSprints(): Observable<any> {
     let url_ = this.baseUrl + "api/Sprints";
-   // url_ = url_.replace(/[?&]$/, "");
-
-    //let url_="https://localhost:44322/api/Sprints";
     let options_ = <RequestInit>{
         method: "GET",
         headers: {
@@ -34,9 +37,10 @@ export class SprintServiceService {
   //   return this.http.get(this.baseUrl+'/api/Sprints');
   // }
 
-  createSprint(data)
+  createSprint(sprint):Observable<any>
   {
-    return this.http.post(this.baseUrl+'api/Sprints',data);
+    return this.http.post(this.baseUrl+'api/Sprints',JSON.stringify(sprint),this.httpOptions)
+    .pipe(map(resp=>sprint));
   }
 
 }
