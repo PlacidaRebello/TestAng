@@ -3,6 +3,7 @@ import {ActivatedRoute,Router} from '@angular/router';
 import { SprintServiceService } from 'src/app/sprint-service.service';
 import {FormBuilder,FormArray,Validators, FormGroup,FormControl} from '@angular/forms';
 import {Sprint} from 'src/app/Models/sprint';
+import { SprintsClient, CreateSprintRequest } from 'src/app/demo.service';
 
 @Component({
   selector: 'app-weather-forecast',
@@ -49,21 +50,28 @@ export class WeatherForecastComponent implements OnInit {
   }
 
   CreateSprint(formvalues){
-      let sprint={
-        sprintName:formvalues.sprintName,
-        sprintPoints:formvalues.sprintPoints
-      }
-      console.log(sprint,"sprint");
+      // let sprint={
+      //   sprintName:formvalues.sprintName,
+      //   sprintPoints:formvalues.sprintPoints
+      // }
+      // console.log(sprint,"sprint");
       
-      console.log(sprint);
-      this.SprintService.createSprint(sprint)
-      .subscribe(resp=>{
-        console.log(resp,"resp");
-        this.data=resp
-      },
-      error=>{
-        console.log(error,"error");
-      })
+      // console.log(sprint);
+      let sprint:SprintsClient = new SprintsClient();
+      let newSprint: CreateSprintRequest = new CreateSprintRequest();;
+      
+      newSprint.sprintName = formvalues.sprintName;
+      newSprint.sprintPoints = formvalues.sprintPoints;
+      newSprint.startDate = new Date();
+      newSprint.endDate = new Date();
+      sprint.postSprint(newSprint);
+      // .subscribe(resp=>{
+      //   console.log(resp,"resp");
+      //   this.data=resp
+      // },
+      // error=>{
+      //   console.log(error,"error");
+      // })
   }
 
   getErrorMessage() {
